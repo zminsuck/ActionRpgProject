@@ -28,10 +28,10 @@ class ACTIONRPGPROJECT_API UDataAsset_InputConfig : public UDataAsset
 	
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputMappingContext* DefauletMappingContext;
+	UInputMappingContext* DefaultMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
 	TArray<FPlayerInputActionConfig> NativeInputActions; // 네이티브 입력 액션
 
-	UInputAction* FindNativeINputActionByTag(const FGameplayTag& InInputTag);
+	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const;
 };

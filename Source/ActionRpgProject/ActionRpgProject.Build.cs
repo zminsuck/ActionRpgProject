@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 using UnrealBuildTool;
 
 public class ActionRpgProject : ModuleRules
@@ -12,8 +10,8 @@ public class ActionRpgProject : ModuleRules
 			"Core",
 			"CoreUObject",
 			"Engine",
-			"InputCore",
-			"GameplayTags",
+            "InputCore",
+            "GameplayTags",
             "EnhancedInput" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

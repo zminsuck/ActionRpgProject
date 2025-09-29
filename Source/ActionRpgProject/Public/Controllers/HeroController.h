@@ -9,5 +9,4 @@ UCLASS()
 class ACTIONRPGPROJECT_API AHeroController : public APlayerController
 {
 	GENERATED_BODY()
-	
 };
