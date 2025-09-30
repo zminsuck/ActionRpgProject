@@ -7,6 +7,7 @@
 #include "DataAsset/Input/DataAsset_InputConfig.h"
 #include "Components/Input/BaseInputComponent.h"
 #include "PlayerGameplayTags.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
 
 #include "DebugHelper.h"
 
@@ -34,6 +35,19 @@ AHeroCharacter::AHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
+void AHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (BaseAbilitySystemComponent && BaseAttributeSet)
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s, AvatarActor: %s"), *BaseAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *BaseAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		
+		Debug::Print(TEXT("Ability System Component valid.") + ASCText, FColor::Green);
+		Debug::Print(TEXT("AttributeSet valid.") + ASCText, FColor::Green);
+	}
+}
+
 void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"));
@@ -55,8 +69,6 @@ void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Debug::Print(TEXT("Working"));
 }
 
 void AHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
