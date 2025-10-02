@@ -30,6 +30,9 @@ void ABaseCharacter::PossessedBy(AController* NewController)
 	{
 		// 초기화 어빌리티 액터 정보
 		BaseAbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+		ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("Forgot to assign start up data to %s"), *GetName());
+
 	}
 }
 

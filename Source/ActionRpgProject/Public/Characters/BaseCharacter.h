@@ -7,6 +7,7 @@
 
 class UBaseAbilitySystemComponent; // 어빌리티 컴포넌트 포워드 선언
 class UBaseAttributeSet;		   // 어빌티리 속성 포워드 선언
+class UDataAsset_BaseStartUpData;
 
 UCLASS()
 class ACTIONRPGPROJECT_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -32,6 +33,11 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	UBaseAttributeSet* BaseAttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData")
+	
+	// 소프트 참조
+	TSoftObjectPtr<UDataAsset_BaseStartUpData> CharacterStartUpData;
 
 public:
 	// 강제 인라인 - 어빌리티 시스템

@@ -12,7 +12,7 @@ class ACTIONRPGPROJECT_API UDataAsset_BaseStartUpData : public UDataAsset
 	GENERATED_BODY()
 	
 public:
-	virtual void GiveToAbilitySystemComponent(UBaseAbilitySystemComponent* InPlayerASCToGive, int32 ApplyLevel = 1);
+	virtual void GiveToAbilitySystemComponent(UBaseAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1);
 
 protected:
 	// 기본 값만 편집 가능 카테고리, 데이터 = StartUpData
@@ -24,5 +24,5 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
 	TArray < TSubclassOf < UBaseGameplayAbility > > ReactiveAbilities;
 
-	void GrantAbilities(const TArray < TSubclassOf < UBaseGameplayAbility > >& InAbilitiesToGive, UBaseAbilitySystemComponent* InPlayerASCToGive, int32 ApplyLevel = 1);
+	void GrantAbilities(const TArray < TSubclassOf < UBaseGameplayAbility > >& InAbilitiesToGive, UBaseAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1);
 };

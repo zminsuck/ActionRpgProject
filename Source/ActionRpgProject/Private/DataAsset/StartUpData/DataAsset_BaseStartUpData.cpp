@@ -2,16 +2,16 @@
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "AbilitySystem/Abilitys/BaseGameplayAbility.h"
 
-void UDataAsset_BaseStartUpData::GiveToAbilitySystemComponent(UBaseAbilitySystemComponent* InPlayerASCToGive, int32 ApplyLevel)
+void UDataAsset_BaseStartUpData::GiveToAbilitySystemComponent(UBaseAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	// ASC 검사 매크로를 사용, 변수가 유효한지 체크
-	check(InPlayerASCToGive);
+	check(InASCToGive);
 
-	GrantAbilities(ActivateOnGivenAbilities, InPlayerASCToGive, ApplyLevel);
-	GrantAbilities(ReactiveAbilities, InPlayerASCToGive, ApplyLevel);
+	GrantAbilities(ActivateOnGivenAbilities, InASCToGive, ApplyLevel);
+	GrantAbilities(ReactiveAbilities, InASCToGive, ApplyLevel);
 }
 
-void UDataAsset_BaseStartUpData::GrantAbilities(const TArray<TSubclassOf<UBaseGameplayAbility>>& InAbilitiesToGive, UBaseAbilitySystemComponent* InPlayerASCToGive, int32 ApplyLevel)
+void UDataAsset_BaseStartUpData::GrantAbilities(const TArray<TSubclassOf<UBaseGameplayAbility>>& InAbilitiesToGive, UBaseAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	if (InAbilitiesToGive.IsEmpty())
 	{
@@ -24,9 +24,9 @@ void UDataAsset_BaseStartUpData::GrantAbilities(const TArray<TSubclassOf<UBaseGa
 
 		// GIF 기능
 		FGameplayAbilitySpec AbilitySpec(Ability);
-		AbilitySpec.SourceObject = InPlayerASCToGive->GetAvatarActor();
+		AbilitySpec.SourceObject = InASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
 
-		InPlayerASCToGive->GiveAbility(AbilitySpec);
+		InASCToGive->GiveAbility(AbilitySpec);
 	}
 }

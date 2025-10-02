@@ -8,6 +8,7 @@
 #include "Components/Input/BaseInputComponent.h"
 #include "PlayerGameplayTags.h"
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "DataAsset/StartUpData/DataAsset_HeroStartUpData.h"
 
 #include "DebugHelper.h"
 
@@ -39,12 +40,15 @@ void AHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (BaseAbilitySystemComponent && BaseAttributeSet)
+	// 소프트 참조에서 유효하지 않은 null을 사용
+	// 이미 유효한 데이터 자산을 할당했다는 의미
+	if (!CharacterStartUpData.IsNull())
 	{
-		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s, AvatarActor: %s"), *BaseAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *BaseAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
-		
-		Debug::Print(TEXT("Ability System Component valid.") + ASCText, FColor::Green);
-		Debug::Print(TEXT("AttributeSet valid.") + ASCText, FColor::Green);
+		// 동기식 로드
+		if (UDataAsset_BaseStartUpData* LoadedData = CharacterStartUpData.LoadSynchronous())
+		{
+			LoadedData->GiveToAbilitySystemComponent(BaseAbilitySystemComponent);
+		}
 	}
 }
 
